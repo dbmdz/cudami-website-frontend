@@ -80,6 +80,14 @@ The cudami frontend webapp comes packaged with one theme, called `colorlib-sideb
 
 ### Theme "colorlib-sidebar-v2"
 
+Template Details:
+
+* Author: Colorlib
+* Released: 2021
+* License: <https://creativecommons.org/licenses/by/3.0/de/>
+* based on: Bootstrap 4
+* Homepage: <https://colorlib.com/wp/template/bootstrap-sidebar-02/>
+
 <a href="./screenshots/colorlib-sidebar-v2.png" target="_blank"><img src="./screenshots/colorlib-sidebar-v2.png" width="250"/></a>
 
 ### Create a custom theme
