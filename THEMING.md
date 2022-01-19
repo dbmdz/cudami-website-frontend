@@ -112,7 +112,7 @@ $ java \
   -Dtemplate.name=my-theme \
   -Dtemplate.navMaxLevel=2 \
   -Dloader.path=./themes \
-  -cp cudami-frontend-website-1.0.0-SNAPSHOT.jar org.springframework.boot.loader.PropertiesLauncher
+  -cp cudami-website-frontend-1.0.0-SNAPSHOT.jar org.springframework.boot.loader.PropertiesLauncher
 ```
 
 Go and have a look at <http://localhost:8080>.

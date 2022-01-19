@@ -20,7 +20,7 @@ Copy the UUID of the created website and start this webapp
 as params like this, e.g.:
 
 ```
-java -jar cudami-frontend-website-1.0.0-SNAPSHOT.jar \
+java -jar cudami-website-frontend-1.0.0-SNAPSHOT.jar \
   --cudami.server.url=http://localhost:9000 \
   --cudami.website=ea9ddc66-e822-4867-9585-a43c6ed8bd98
 ```
@@ -63,7 +63,7 @@ set the config property `logging.level.de.digitalcollections.cudami.frontend` to
 An example using all possible configuration properties (debug logging level included):
 
 ```
-$ java -jar cudami-frontend-website-1.0.0-SNAPSHOT.jar \
+$ java -jar cudami-website-frontend-1.0.0-SNAPSHOT.jar \
   --cudami.server.url=http://localhost:9000 \
   --cudami.website=ea9ddc66-e822-4867-9585-a43c6ed8bd98 \
   --cudami.webpages.content=ead664b6-5fcc-414e-b3bb-133f0af1acb8 \
