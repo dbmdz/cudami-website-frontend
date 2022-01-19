@@ -1,6 +1,6 @@
-# cudami Website Webapp
+# cudami Website Frontend Webapp
 
-This webapp is an out of the box cudami Website "viewer".
+This webapp is an out of the box cudami Website "viewer":
 It provides the web-frontend (HTML) for a website and its webpages created in cudami.
 
 ## Prerequisites
