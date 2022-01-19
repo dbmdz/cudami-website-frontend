@@ -1,0 +1,9 @@
+**/target
+/.idea
+**/*.iml
+/nb-configuration.xml
+**/nbactions.xml
+build
+dist
+node_modules
+**/nbproject/
