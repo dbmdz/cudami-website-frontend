@@ -2,14 +2,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  
+
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
     <version>2.6.2</version>
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
-  
+
   <groupId>de.digitalcollections.cudami</groupId>
   <artifactId>cudami-website-frontend</artifactId>
   <version>1.0.0-SNAPSHOT</version>
@@ -18,7 +18,7 @@
   <name>DigitalCollections: cudami Website Frontend (Spring Boot)</name>
   <description>Webapp showing a website with all webpage content using cudami as backend</description>
   <url>https://github.com/dbmdz/cudami-website-frontend</url>
-  
+
   <licenses>
     <license>
       <name>MIT License</name>
@@ -37,19 +37,19 @@
   <scm>
     <connection>https://github.com/dbmdz/cudami-website-frontend.git</connection>
     <developerConnection>git@github.com:dbmdz/cudami-website-frontend.git</developerConnection>
-    <url>https://github.com/dbmdz/cudami</url>
+    <url>https://github.com/dbmdz/cudami-website-frontend</url>
   </scm>
-  
+
   <properties>
     <java.version>11</java.version>
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    
+
     <version.dc-cudami-client>5.1.0</version.dc-cudami-client>
     <version.guava>31.0.1-jre</version.guava>
     <version.spotbugs>4.2.3</version.spotbugs>
-    
+
     <!-- plugins -->
     <version.githook-maven-plugin>1.0.5</version.githook-maven-plugin>
     <version.jacoco-maven-plugin>0.8.7</version.jacoco-maven-plugin>
@@ -60,7 +60,7 @@
     <version.nexus-staging-maven-plugin>1.6.8</version.nexus-staging-maven-plugin>
     <version.spotbugs-maven-plugin>4.5.0.0</version.spotbugs-maven-plugin>
   </properties>
-  
+
   <dependencies>
     <dependency>
       <groupId>com.google.guava</groupId>
@@ -257,7 +257,7 @@
       </plugins>
     </pluginManagement>
   </build>
-  
+
   <distributionManagement>
     <snapshotRepository>
       <id>ossrh-snapshots</id>
@@ -289,7 +289,7 @@
       </plugin>
     </plugins>
   </reporting>
-  
+
   <profiles>
     <profile>
       <id>deploy</id>
