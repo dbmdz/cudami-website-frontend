@@ -48,7 +48,7 @@
 
     <version.dc-cudami-client>5.2.1</version.dc-cudami-client>
     <version.guava>31.1-jre</version.guava>
-    <version.spotbugs>4.2.3</version.spotbugs>
+    <version.spotbugs>4.6.0</version.spotbugs>
 
     <!-- plugins -->
     <version.githook-maven-plugin>1.0.5</version.githook-maven-plugin>
