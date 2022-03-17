@@ -16,12 +16,14 @@
         <div class="aside-menu col-md-3">
           <ul class="list-unstyled">
             <li th:each="subpage : ${webpage.children}" class="flex items-baseline">
-              &raquo; <a th:utext="${subpage.label.getText(locale)}" th:href="@{/p/__${subpage.uuid}__}">webpage label</a>
+              &raquo; <a th:replace="fragments/localized-url-alias :: renderLink(${subpage}, ${#locale}, ${website})">
+                webpage label
+              </a>
             </li>
           </ul>
         </div>
       </th:block>
     </div>
   </th:block>  
-</body>
+  </body>
 </html>

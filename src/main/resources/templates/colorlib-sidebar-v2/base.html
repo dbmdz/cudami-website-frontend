@@ -13,7 +13,6 @@
     <link rel="stylesheet" th:href="@{/colorlib-sidebar-v2/css/main.css}">
     <link rel="stylesheet" th:href="@{/css/cudami/media-in-text.css}">
     <meta name="robots" content="noindex, follow">
-    
   </head>
   <body>
     <div class="wrapper d-flex align-items-stretch">
@@ -56,7 +55,9 @@
         <th:block th:if="${footerWebpages}">
           <footer>
             <span th:each="wp : ${footerWebpages}" class="m-1">
-              <a th:utext="${wp.label.getText(locale)}" th:href="@{/p/__${wp.uuid}__}">webpage label</a>
+              <a th:replace="fragments/localized-url-alias :: renderLink(${wp}, ${#locale}, ${website})">
+                webpage label
+              </a>
             </span>
           </footer>
         </th:block>
