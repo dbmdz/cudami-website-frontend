@@ -20,36 +20,55 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Controller
 public class UrlAliasController {
 
-  private final UUID websiteUuid;
-
   private final CudamiUrlAliasClient cudamiUrlAliasClient;
+  private final UUID websiteUuid;
 
   public UrlAliasController(CudamiClient cudamiClient, CudamiConfig cudamiConfig) {
     this.cudamiUrlAliasClient = cudamiClient.forUrlAliases();
     this.websiteUuid = cudamiConfig.getWebsite();
   }
 
+  /**
+   * Forwards to Identifiable specific endpoint if SLUG is a primary url alias. Redirects to primary
+   * SLUG if given SLUG is not a primaray url alias.
+   *
+   * @param request current http request
+   * @param slug human readable relative URL to an identifiable
+   * @return target webpage or redirect to primary slug
+   * @throws HttpException if backend system error
+   * @throws ResourceNotFoundException if slug is unknown
+   */
   @GetMapping({"/{slug:.+}"})
   public String fallback(HttpServletRequest request, @PathVariable String slug)
       throws HttpException, ResourceNotFoundException {
 
-    LocalizedUrlAliases localizedUrlAliases =
+    // fields of UrlAlias we can work with:
+    // boolean primary, String slug, Website website,
+    // Locale targetLanguage, IdentifiableType targetIdentifiableType, EntityType targetEntityType,
+    // UUID targetUuid
+    // get all primary UrlAliases
+    // * for our (configured) website (or "null"-website if otherwise not found)
+    // * having same slug (no matter what target language)
+    // * having same target identifiable
+    // other words: get all primary url aliases for the configured website referring to the same
+    // target identifiable(s) as the slug.
+    LocalizedUrlAliases primaryUrlAliasesOfTargetIdentifiable =
         cudamiUrlAliasClient.findPrimaryLinks(websiteUuid, slug);
 
-    if (localizedUrlAliases.isEmpty()) {
+    // wenn slug überhaupt nicht existiert (weder primary noch nicht-primary), dann
+    // ResourceNotFoundException
+    if (primaryUrlAliasesOfTargetIdentifiable.isEmpty()) {
       throw new ResourceNotFoundException();
     }
 
-    Locale locale = getLocaleFromMatchingSlug(localizedUrlAliases);
-
-    // We have found primaryLinks for the given slug, website and locale.
-    // Now, check, if the slug from the request is the slug of the LocalizedUrlAlias
-    UrlAlias firstMatchingUrlAlias = localizedUrlAliases.get(locale).get(0);
-    if (slug.equals(firstMatchingUrlAlias.getSlug())) {
+    UrlAlias firstMatchingPrimaryUrlAlias =
+        getFirstMatchingPrimaryUrlAlias(primaryUrlAliasesOfTargetIdentifiable);
+    if (slug.equals(firstMatchingPrimaryUrlAlias.getSlug())) {
       request.setAttribute("request_uri", request.getRequestURI());
       // Make the correct forward now, depending on the target type
-      UUID targetUUID = firstMatchingUrlAlias.getTargetUuid();
-      IdentifiableType targetIdentifiableType = firstMatchingUrlAlias.getTargetIdentifiableType();
+      UUID targetUUID = firstMatchingPrimaryUrlAlias.getTargetUuid();
+      IdentifiableType targetIdentifiableType =
+          firstMatchingPrimaryUrlAlias.getTargetIdentifiableType();
 
       // We have a "webpage"
       // FIXME: should be more generic for other identifiables not being an entity (e.g.
@@ -57,7 +76,7 @@ public class UrlAliasController {
       if (IdentifiableType.RESOURCE.equals(targetIdentifiableType)) {
         return "forward:/p/" + targetUUID;
       }
-      EntityType targetEntityType = firstMatchingUrlAlias.getTargetEntityType();
+      EntityType targetEntityType = firstMatchingPrimaryUrlAlias.getTargetEntityType();
       switch (targetEntityType) {
           // FIXME: only example, not linked to a controller, yet
         case ARTICLE:
@@ -67,11 +86,22 @@ public class UrlAliasController {
       }
     } else {
       // Make a redirect to the primary slug
-      return "redirect:/" + firstMatchingUrlAlias.getSlug();
+      return "redirect:/" + firstMatchingPrimaryUrlAlias.getSlug();
     }
   }
 
-  private Locale getLocaleFromMatchingSlug(LocalizedUrlAliases localizedUrlAliases) {
+  private UrlAlias getFirstMatchingPrimaryUrlAlias(
+      LocalizedUrlAliases primaryUrlAliasesOfTargetIdentifiable) {
+    // get existing target locale / language
+    Locale locale = getLocaleFromPrimaryUrlAliases(primaryUrlAliasesOfTargetIdentifiable);
+    // We have found primaryLinks for the given slug, website and locale.
+    // Now, check, if the slug from the request is the slug of the LocalizedUrlAlias
+    UrlAlias firstMatchingPrimaryUrlAlias =
+        primaryUrlAliasesOfTargetIdentifiable.get(locale).get(0);
+    return firstMatchingPrimaryUrlAlias;
+  }
+
+  protected Locale getLocaleFromPrimaryUrlAliases(LocalizedUrlAliases localizedUrlAliases) {
     // If we have only one possible matching language, we can just continue
     if (localizedUrlAliases.getTargetLanguages().size() == 1) {
       return localizedUrlAliases.getTargetLanguages().get(0);
