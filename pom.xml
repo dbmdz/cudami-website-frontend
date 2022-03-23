@@ -47,6 +47,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
     <version.dc-cudami-client>5.2.2</version.dc-cudami-client>
+    <version.dc-model>9.1.1</version.dc-model>
     <version.guava>31.1-jre</version.guava>
     <version.spotbugs>4.2.3</version.spotbugs>
 
@@ -71,6 +72,16 @@
       <groupId>de.digitalcollections.cudami</groupId>
       <artifactId>dc-cudami-client</artifactId>
       <version>${version.dc-cudami-client}</version>
+    </dependency>
+    <dependency>
+      <groupId>de.digitalcollections.model</groupId>
+      <artifactId>dc-model</artifactId>
+      <version>${version.dc-model}</version>
+    </dependency>
+    <dependency>
+      <groupId>de.digitalcollections.model</groupId>
+      <artifactId>dc-model-jackson</artifactId>
+      <version>${version.dc-model}</version>
     </dependency>
     <dependency>
       <groupId>nz.net.ultraq.thymeleaf</groupId>

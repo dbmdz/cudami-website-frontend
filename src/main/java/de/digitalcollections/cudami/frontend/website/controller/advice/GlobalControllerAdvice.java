@@ -2,11 +2,15 @@ package de.digitalcollections.cudami.frontend.website.controller.advice;
 
 import de.digitalcollections.cudami.frontend.website.config.TemplateConfig;
 import de.digitalcollections.cudami.frontend.website.service.ContentService;
+import de.digitalcollections.model.exception.ResourceNotFoundException;
 import de.digitalcollections.model.identifiable.entity.Website;
 import de.digitalcollections.model.identifiable.web.Webpage;
 import java.util.List;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 @ControllerAdvice
@@ -20,6 +24,10 @@ public class GlobalControllerAdvice {
     this.templateConfig = templateConfig;
     this.contentService = contentService;
   }
+
+  @ExceptionHandler(ResourceNotFoundException.class)
+  @ResponseStatus(HttpStatus.NOT_FOUND)
+  public void handleNotFound() {}
 
   @ModelAttribute("contentWebpages")
   public List<Webpage> getContentWebpages() {
