@@ -55,8 +55,7 @@ public class UrlAliasController {
     LocalizedUrlAliases primaryUrlAliasesOfTargetIdentifiable =
         cudamiUrlAliasClient.findPrimaryLinks(websiteUuid, slug);
 
-    // wenn slug überhaupt nicht existiert (weder primary noch nicht-primary), dann
-    // ResourceNotFoundException
+    // if slug does not exist at all: ResourceNotFoundException
     if (primaryUrlAliasesOfTargetIdentifiable.isEmpty()) {
       throw new ResourceNotFoundException();
     }
