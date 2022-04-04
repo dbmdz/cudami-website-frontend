@@ -46,7 +46,7 @@
     <maven.compiler.target>${java.version}</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-    <version.dc-cudami-client>5.2.2</version.dc-cudami-client>
+    <version.dc-cudami-client>5.2.3</version.dc-cudami-client>
     <version.dc-model>9.1.1</version.dc-model>
     <version.guava>31.1-jre</version.guava>
     <version.spotbugs>4.2.3</version.spotbugs>
