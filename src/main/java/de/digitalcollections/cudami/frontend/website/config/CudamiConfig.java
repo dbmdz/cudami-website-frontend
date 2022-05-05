@@ -16,7 +16,7 @@ public class CudamiConfig {
 
   public CudamiConfig(Server server, Map<String, UUID> webpages, UUID website) {
     this.server = server;
-    this.webpages = webpages;
+    this.webpages = webpages != null ? Map.copyOf(webpages) : null;
     this.website = website;
   }
 
@@ -32,7 +32,7 @@ public class CudamiConfig {
   }
 
   public Map<String, UUID> getWebpages() {
-    return webpages;
+    return webpages != null ? Map.copyOf(webpages) : null;
   }
 
   public UUID getWebsite() {
