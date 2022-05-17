@@ -31,7 +31,7 @@
               </a>
             </div>
 
-            <a th:href="@{/}" class="text-white fs-4" th:text="${website.label.getText()}">Website label</a>
+            <a th:href="@{/}" class="text-white text-break fs-4" th:text="${website.label.getText()}">Website label</a>
           </div>
 
           <ul class="list-unstyled components mb-5" th:if="${not #lists.isEmpty(contentWebpages)}" th:with="currentLevel=0,maxLevel=${navMaxLevel}">
