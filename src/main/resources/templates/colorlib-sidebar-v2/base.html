@@ -26,7 +26,9 @@
         <div class="p-4 pt-3">
           <div class="text-center">
             <div th:if="${website.previewImage}">
-              <a th:href="@{/}" class="logo"><img th:src="${website.previewImage.httpBaseUrl} + '/full/200,/0/default.jpg'" /></a>
+              <a th:href="@{/}" class="logo">
+                <th:block th:insert="cudami/fragments/previewimage-to-html::renderImage(${website.previewImage}, ${website.previewImageRenderingHints}, ${#locale.language}, 200)"></th:block>
+              </a>
             </div>
 
             <a th:href="@{/}" class="text-white fs-4" th:text="${website.label.getText()}">Website label</a>
