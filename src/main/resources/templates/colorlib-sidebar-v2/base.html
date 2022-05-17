@@ -4,7 +4,7 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
   <head>
-    <title>Website Title</title>
+    <title th:text="${website.label.getText()}">Website Title</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" th:href="@{/colorlib-sidebar-v2/css/font-awesome-5.15.4-all.min.css}">
