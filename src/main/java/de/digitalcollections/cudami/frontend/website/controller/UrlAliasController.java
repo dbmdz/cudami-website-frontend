@@ -1,10 +1,10 @@
 package de.digitalcollections.cudami.frontend.website.controller;
 
 import de.digitalcollections.cudami.client.CudamiClient;
-import de.digitalcollections.cudami.client.exceptions.HttpException;
 import de.digitalcollections.cudami.client.identifiable.alias.CudamiUrlAliasClient;
 import de.digitalcollections.cudami.frontend.website.config.CudamiConfig;
 import de.digitalcollections.model.exception.ResourceNotFoundException;
+import de.digitalcollections.model.exception.TechnicalException;
 import de.digitalcollections.model.identifiable.IdentifiableType;
 import de.digitalcollections.model.identifiable.alias.LocalizedUrlAliases;
 import de.digitalcollections.model.identifiable.alias.UrlAlias;
@@ -35,12 +35,12 @@ public class UrlAliasController {
    * @param request current http request
    * @param slug human readable relative URL to an identifiable
    * @return target webpage or redirect to primary slug
-   * @throws HttpException if backend system error
    * @throws ResourceNotFoundException if slug is unknown
+   * @throws TechnicalException if backend system error
    */
   @GetMapping({"/{slug:.+}"})
   public String fallback(HttpServletRequest request, @PathVariable String slug)
-      throws HttpException, ResourceNotFoundException {
+      throws ResourceNotFoundException, TechnicalException {
 
     // fields of UrlAlias we can work with:
     // boolean primary, String slug, Website website,
@@ -53,7 +53,7 @@ public class UrlAliasController {
     // other words: get all primary url aliases for the configured website referring to the same
     // target identifiable(s) as the slug.
     LocalizedUrlAliases primaryUrlAliasesOfTargetIdentifiable =
-        cudamiUrlAliasClient.findPrimaryLinks(websiteUuid, slug);
+        cudamiUrlAliasClient.getPrimaryLinks(websiteUuid, slug);
 
     // if slug does not exist at all: ResourceNotFoundException
     if (primaryUrlAliasesOfTargetIdentifiable.isEmpty()) {
