@@ -1,14 +1,14 @@
 package de.digitalcollections.cudami.frontend.website.service;
 
 import de.digitalcollections.cudami.client.CudamiClient;
-import de.digitalcollections.cudami.client.exceptions.HttpException;
 import de.digitalcollections.cudami.client.identifiable.entity.CudamiWebsitesClient;
 import de.digitalcollections.cudami.client.identifiable.web.CudamiWebpagesClient;
 import de.digitalcollections.cudami.frontend.website.config.CudamiConfig;
+import de.digitalcollections.model.exception.TechnicalException;
 import de.digitalcollections.model.identifiable.entity.Website;
 import de.digitalcollections.model.identifiable.web.Webpage;
-import de.digitalcollections.model.paging.PageRequest;
-import de.digitalcollections.model.paging.PageResponse;
+import de.digitalcollections.model.list.paging.PageRequest;
+import de.digitalcollections.model.list.paging.PageResponse;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Locale;
@@ -44,9 +44,9 @@ public class ContentService {
 
       if (cudamiConfig.getWebpage("content") == null) {
         // get root webpages
-        PageRequest pageRequest = PageRequest.defaultBuilder().pageSize(100).build();
+        PageRequest pageRequest = PageRequest.builder().pageSize(100).build();
         PageResponse<Webpage> rootPagesResponse =
-            cudamiWebsitesClient.getRootPages(website.getUuid(), pageRequest);
+            cudamiWebsitesClient.findRootWebpages(website.getUuid(), pageRequest);
         allContentWebpages = rootPagesResponse.getContent();
       } else {
         Pair<Webpage, Locale> webpagePair = getWebpage(cudamiConfig.getWebpage("content"));
@@ -64,7 +64,7 @@ public class ContentService {
         activeContentWebpage.setChildren(activeChildrenTree);
       }
       return activeContentWebpages;
-    } catch (HttpException ex) {
+    } catch (TechnicalException ex) {
       LOGGER.warn("Could not fetch content webpages due to exc={}", ex);
       return null;
     }
@@ -102,8 +102,8 @@ public class ContentService {
     Locale webpageLocale;
     try {
       Locale locale = Locale.forLanguageTag(LocaleContextHolder.getLocale().getLanguage());
-      webpage = cudamiWebpagesClient.findActiveOne(uuid, locale);
-    } catch (HttpException ex) {
+      webpage = cudamiWebpagesClient.getActiveByUuid(uuid, locale);
+    } catch (TechnicalException ex) {
       LOGGER.warn("Could not fetch webpage with uuid={} due to exc={}", uuid.toString(), ex);
       webpage = null;
     }
@@ -114,8 +114,8 @@ public class ContentService {
   public Website getWebsite() {
     UUID websiteUuid = cudamiConfig.getWebsite();
     try {
-      return cudamiWebsitesClient.findOne(websiteUuid);
-    } catch (HttpException ex) {
+      return cudamiWebsitesClient.getByUuid(websiteUuid);
+    } catch (TechnicalException ex) {
       LOGGER.error("Website with UUID {} can not be loaded due to exc={}", websiteUuid, ex);
       return null;
     }
