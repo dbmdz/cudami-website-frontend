@@ -5,10 +5,9 @@ import de.digitalcollections.cudami.client.identifiable.alias.CudamiUrlAliasClie
 import de.digitalcollections.cudami.frontend.website.config.CudamiConfig;
 import de.digitalcollections.model.exception.ResourceNotFoundException;
 import de.digitalcollections.model.exception.TechnicalException;
-import de.digitalcollections.model.identifiable.IdentifiableType;
+import de.digitalcollections.model.identifiable.IdentifiableObjectType;
 import de.digitalcollections.model.identifiable.alias.LocalizedUrlAliases;
 import de.digitalcollections.model.identifiable.alias.UrlAlias;
-import de.digitalcollections.model.identifiable.entity.EntityType;
 import java.util.Locale;
 import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
@@ -66,22 +65,17 @@ public class UrlAliasController {
       request.setAttribute("request_uri", request.getRequestURI());
       // Make the correct forward now, depending on the target type
       UUID targetUUID = firstMatchingPrimaryUrlAlias.getTargetUuid();
-      IdentifiableType targetIdentifiableType =
-          firstMatchingPrimaryUrlAlias.getTargetIdentifiableType();
+      IdentifiableObjectType targetIdentifiableObjectType =
+          firstMatchingPrimaryUrlAlias.getTargetIdentifiableObjectType();
 
-      // We have a "webpage"
-      // FIXME: should be more generic for other identifiables not being an entity (e.g.
-      // fileresources)
-      if (IdentifiableType.RESOURCE.equals(targetIdentifiableType)) {
-        return "forward:/p/" + targetUUID;
-      }
-      EntityType targetEntityType = firstMatchingPrimaryUrlAlias.getTargetEntityType();
-      switch (targetEntityType) {
-          // FIXME: only example, not linked to a controller, yet
-        case ARTICLE:
-          return "forward:/article/" + targetUUID;
+      switch (targetIdentifiableObjectType) {
+        case WEBPAGE:
+          return "forward:/p/" + targetUUID;
         default:
-          throw new AssertionError();
+          throw new ResourceNotFoundException(
+              String.format(
+                  "Handling for identifiable %s of type %s not found.",
+                  targetUUID, targetIdentifiableObjectType));
       }
     } else {
       // Make a redirect to the primary slug
