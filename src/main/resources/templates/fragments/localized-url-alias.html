@@ -5,7 +5,7 @@
 
   <th:block th:fragment="renderLink(identifiable, locale, website)">
     <a th:utext="${identifiable.label.getText(locale)}"
-       th:href="@{primaryUA ? '/' + ${primaryUA.slug} : '/p/' + ${identifiable.uuid}}"
+       th:href="@{${primaryUA} ? '/' + ${primaryUA.slug} : '/p/' + ${identifiable.uuid}}"
        th:with="primaryUA=${identifiable.getPrimaryUrlAlias(locale, website)}"
     >label</a>
   </th:block>
