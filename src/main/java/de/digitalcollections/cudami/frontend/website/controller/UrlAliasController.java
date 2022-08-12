@@ -37,7 +37,7 @@ public class UrlAliasController {
    * @throws ResourceNotFoundException if slug is unknown
    * @throws TechnicalException if backend system error
    */
-  @GetMapping({"/{slug:.+}"})
+  @GetMapping({"/{slug:[a-zA-Z0-9-]+}"})
   public String fallback(HttpServletRequest request, @PathVariable String slug)
       throws ResourceNotFoundException, TechnicalException {
 
