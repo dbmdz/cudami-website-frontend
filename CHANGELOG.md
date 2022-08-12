@@ -6,12 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ## [Unreleased]
 
+## [1.0.0](https://github.com/dbmdz/cudami-website-frontend/releases/tag/1.0.0) - 2022-08-12
+
 ### Added
 
 - Added first working code base. Features include: Website rendering, navigation, footer, themes support and default theme "colorlib-sidebar-v2"
-
-### Changed
-
-
-### Removed
-
+- Added handling of url aliases
