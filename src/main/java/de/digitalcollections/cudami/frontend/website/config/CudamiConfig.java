@@ -3,16 +3,21 @@ package de.digitalcollections.cudami.frontend.website.config;
 import java.net.URI;
 import java.util.Map;
 import java.util.UUID;
+import javax.validation.constraints.NotNull;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.ConstructorBinding;
+import org.springframework.validation.annotation.Validated;
 
 @ConfigurationProperties(prefix = "cudami")
 @ConstructorBinding
+@Validated
 public class CudamiConfig {
 
   private final Server server;
+
   private final Map<String, UUID> webpages;
-  private final UUID website;
+
+  @NotNull private final UUID website;
 
   public CudamiConfig(Server server, Map<String, UUID> webpages, UUID website) {
     this.server = server;
