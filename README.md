@@ -38,7 +38,7 @@ The website will be rendered with all webpages (down to given level, default = 3
 If you want to cluster your website's webpages into pages that are
 
 - content pages (shown in sidebar main navigation) and
-- footer pages (shown in footer bar at bootom of each page)
+- footer pages (shown in footer bar at bottom of each page)
 
 you can specify the parent webpage UUID for
 
