@@ -9,14 +9,14 @@
   <th:block layout:fragment="content">
     <div class="row">
       <div class="col-md-9">
-        <th:block th:if="${webpage}" th:insert="cudami/fragments/webpage-to-html :: renderWebpage(${webpage}, ${locale})">
+        <th:block th:if="${webpage}" th:insert="~{cudami/fragments/webpage-to-html :: renderWebpage(${webpage}, ${locale})}">
         </th:block>
       </div>
       <th:block th:if="${not #lists.isEmpty(webpage.children)}">
         <div class="aside-menu col-md-3">
           <ul class="list-unstyled">
             <li th:each="subpage : ${webpage.children}" class="flex items-baseline">
-              &raquo; <a th:replace="fragments/localized-url-alias :: renderLink(${subpage}, ${#locale}, ${website})">
+              &raquo; <a th:replace="~{fragments/localized-url-alias :: renderLink(${subpage}, ${#locale}, ${website})}">
                 webpage label
               </a>
             </li>

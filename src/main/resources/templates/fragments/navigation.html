@@ -5,7 +5,7 @@
 
   <th:block th:fragment="renderDynamicWebpageNavigationTree(webpage)">
     <th:block th:if="${#lists.isEmpty(webpage.children)}">
-      <a th:replace="fragments/localized-url-alias :: renderLink(${webpage}, ${#locale}, ${website})">
+      <a th:replace="~{fragments/localized-url-alias :: renderLink(${webpage}, ${#locale}, ${website})}">
         webpage label
       </a>
     </th:block>
@@ -22,7 +22,7 @@
   <th:block th:fragment="renderWebpageNavigationTree(webpage, currentLevel, maxLevel)">
     <th:block th:with="currentLevel=${currentLevel} + 1">
       <th:block th:if="${currentLevel} <= ${maxLevel}">
-        <a th:replace="fragments/localized-url-alias :: renderLink(${webpage}, ${#locale}, ${website})">
+        <a th:replace="~{fragments/localized-url-alias :: renderLink(${webpage}, ${#locale}, ${website})}">
           webpage label
         </a>
         <th:block th:if="${currentLevel} < ${maxLevel} AND ${webpage.children}">

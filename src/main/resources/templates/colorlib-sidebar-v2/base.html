@@ -27,7 +27,7 @@
           <div class="text-center">
             <div th:if="${website.previewImage}">
               <a th:href="@{/}" class="logo">
-                <th:block th:insert="cudami/fragments/previewimage-to-html::renderImage(${website.previewImage}, ${website.previewImageRenderingHints}, ${#locale.language}, 200)"></th:block>
+                <th:block th:insert="~{cudami/fragments/previewimage-to-html::renderImage(${website.previewImage}, ${website.previewImageRenderingHints}, ${#locale.language}, 200)}"></th:block>
               </a>
             </div>
 
@@ -36,7 +36,7 @@
 
           <ul class="list-unstyled components mb-5" th:if="${not #lists.isEmpty(contentWebpages)}" th:with="currentLevel=0,maxLevel=${navMaxLevel}">
             <li th:each="wp : ${contentWebpages}">
-            <th:block th:insert="fragments/navigation :: renderWebpageNavigationTree(${wp},${currentLevel},${maxLevel})"></th:block>
+            <th:block th:insert="~{fragments/navigation :: renderWebpageNavigationTree(${wp},${currentLevel},${maxLevel})}"></th:block>
             </li>
           </ul>
 
@@ -57,7 +57,7 @@
         <th:block th:if="${footerWebpages}">
           <footer>
             <span th:each="wp : ${footerWebpages}" class="m-1">
-              <a th:replace="fragments/localized-url-alias :: renderLink(${wp}, ${#locale}, ${website})">
+              <a th:replace="~{fragments/localized-url-alias :: renderLink(${wp}, ${#locale}, ${website})}">
                 webpage label
               </a>
             </span>
