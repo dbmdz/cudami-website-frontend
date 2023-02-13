@@ -29,7 +29,7 @@ public class SpringConfigSecurity {
         .requestMatchers(EndpointRequest.to("prometheus", "version"))
         .permitAll()
         .requestMatchers(EndpointRequest.toAnyEndpoint())
-        .hasRole("ENDPOINT_ADMIN")
+        .hasRole("MONITORING")
         .requestMatchers(AnyRequestMatcher.INSTANCE)
         .permitAll()
         .and()
