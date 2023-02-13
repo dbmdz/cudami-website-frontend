@@ -28,7 +28,7 @@ spring:
     user:
       name: admin
       password: secret
-      roles: ENDPOINT_ADMIN
+      roles: MONITORING
 
 template:
   name: colorlib-sidebar-v2
