@@ -10,3 +10,7 @@ node_modules
 
 application-local.yaml
 application-local.yml
+
+**/.classpath
+**/.project
+**/.settings
