@@ -12,7 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - Upgraded Spring Boot to v3.0.2
 - Upgraded cudami client to v6.2.1
 
-## [1.0.1](https://github.com/dbmdz/cudami-website-frontend/releases/tag/1.0.0) - 2022-08-16
+## [1.0.1](https://github.com/dbmdz/cudami-website-frontend/releases/tag/1.0.1) - 2022-08-16
 
 ### Added
 
