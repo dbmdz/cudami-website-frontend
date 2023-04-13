@@ -28,7 +28,7 @@
         <th:block th:if="${currentLevel} < ${maxLevel} AND ${webpage.children}">
           <ul class="list-unstyled">
             <li th:each="subpage : ${webpage.children}" class="flex items-baseline">
-            <th:block th:insert=":: renderWebpageNavigationTree(${subpage},${currentLevel},${maxLevel})"></th:block>
+            <th:block th:insert="~{::renderWebpageNavigationTree(${subpage},${currentLevel},${maxLevel})}"></th:block>
             </li>
           </ul>
         </th:block>
