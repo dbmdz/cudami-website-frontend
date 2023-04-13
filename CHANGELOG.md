@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ## [Unreleased]
 
+## [2.0.1](https://github.com/dbmdz/cudami-website-frontend/releases/tag/2.0.1) - 2023-04-13
+
 ### Fixed
 
 - Fixed a deprecated template syntax
